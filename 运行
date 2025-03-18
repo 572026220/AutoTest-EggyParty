@@ -1,0 +1,19 @@
+# auto_test.py
+   from airtest.core.api import *
+   from poco.drivers.unity3d import UnityPoco
+
+   # 初始化设备连接
+   connect_device("Android:///")
+   poco = UnityPoco()
+
+   def test_map_loading():
+       # 测试地图加载速度
+       start_time = time.time()
+       poco("btn_play").click()
+       poco("map_selection").wait_for_appearance(10)
+       end_time = time.time()
+       assert end_time - start_time < 5, "地图加载超时！"
+       print(f"地图加载耗时：{end_time - start_time:.2f}秒")
+
+   if __name__ == "__main__":
+       test_map_loading()
